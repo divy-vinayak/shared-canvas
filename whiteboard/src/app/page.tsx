@@ -1,3 +1,3 @@
 export default function Home() {
-  return <div>testing mounts yaya!</div>;
+  return <div>Finally we're here</div>;
 }
