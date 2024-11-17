@@ -1,5 +1,6 @@
 services:
   whiteboard:
+    container_name: whiteboard-next-app
     build:
       context: ./whiteboard
       dockerfile: Dockerfile
@@ -7,6 +8,7 @@ services:
       - "3000:3000"
     volumes:
       - ./whiteboard/src:/whiteboard-app/src
+      - ./whiteboard/public/:/whiteboard-app/public
     env_file:
       - ./whiteboard/.env
     depends_on:
@@ -31,3 +33,18 @@ services:
     volumes:
       - ./redis/volume:/data
 
+  prisma-studio:
+    container_name: prisma-studio
+    build:
+      context: ./whiteboard
+      dockerfile: Dockerfile
+    command: npx prisma studio
+    ports:
+      - "5555:5555"  # The port Prisma Studio will run on
+    env_file:
+      - ./whiteboard/.env
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      - NODE_ENV=development

@@ -5,9 +5,8 @@ WORKDIR /whiteboard-app
 COPY package* .
 COPY ./prisma .
 
-RUN npm install
-# RUN npx prisma generate
+RUN npm install && npx prisma generate
 
 COPY . .
 
-CMD [ "npm", "run", "dev" ]
+CMD ["sh", "-c", "npx prisma migrate dev && npm run dev"]
