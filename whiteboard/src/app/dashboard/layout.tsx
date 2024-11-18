@@ -13,7 +13,5 @@ export default async function ({
     console.log("Here")
     redirect("/signIn");
   }
-  return <div>
-    {children}
-  </div>;
+  return <> {children} </>;
 }
